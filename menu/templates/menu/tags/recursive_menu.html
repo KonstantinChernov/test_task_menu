@@ -1,0 +1,20 @@
+
+{% if root_item  %}
+
+<ul>
+<li><a href="?item={{ root_item.url }}">{{ root_item.title }}</a>
+
+
+            {% if root_item.children and root_item in list_of_parents %}
+                {% for child in root_item.children.all %}
+
+                    {%with root_item=child root_menu_url=root_menu_url template_name="menu/tags/recursive_menu.html" %}
+                       {% include template_name %}
+                    {%endwith%}
+
+                {% endfor %}
+            {% endif %}
+
+</li>
+</ul>
+{% endif %}
